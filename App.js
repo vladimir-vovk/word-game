@@ -1,3 +1,3 @@
-import App from 'src/App'
+import App from 'src/app/App'
 
 export default () => <App />
