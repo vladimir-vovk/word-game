@@ -1,5 +1,5 @@
 <p align="center">
-The game where you need to guess a word related to cats. 🐈‍⬛ Meow!
+The game where you need to guess words related to cats. 🐈‍⬛ Meow!
 </p>
 
 <h1 align="center">Cat Words Game 😻</h1>
