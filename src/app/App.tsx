@@ -1,8 +1,8 @@
 import { ReactElement, useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
-import { WORD_LENGTH } from 'src/constants'
+import { Spacing, WORD_LENGTH } from 'src/constants'
 import { GameOver } from 'src/game-over'
 import { GuessSlots } from 'src/guess-slots'
 import { Keyboard } from 'src/keyboard'
@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   text: {
-    marginBottom: 8
+    marginBottom: 8,
+    marginTop: Platform.OS === 'web' ? Spacing.lg : Spacing.sm
   }
 })
 

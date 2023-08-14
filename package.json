@@ -22,15 +22,15 @@
   },
   "keywords": [
     "react-native",
-    "expo",
-    "typescript",
-    "template"
+    "cat",
+    "word",
+    "game"
   ],
   "author": "Vladimir Vovk",
   "license": "MIT",
-  "homepage": "https://github.com/vladimir-vovk/expo-ts",
+  "homepage": "",
   "bugs": {
-    "url": "https://github.com/vladimir-vovk/expo-ts/issues"
+    "url": ""
   },
   "dependencies": {
     "@expo/webpack-config": "^18.1.2",
