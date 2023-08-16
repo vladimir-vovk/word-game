@@ -7,6 +7,10 @@ The game where you need to guess words related to cats. 🐈‍⬛ Meow!
 
 <img src="./screen.gif" width="300"></img>
 
+The first project for excellent [The Joy of React](https://www.joyofreact.com/) course taught by [Josh W Comeau](https://twitter.com/JoshWComeau).
+
+[Play it online](https://cats-word-game.vovk.in) 🕹️
+
 ## Quick start
 
 1. Clone the project.
