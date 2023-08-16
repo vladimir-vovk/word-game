@@ -2,7 +2,7 @@
 The game where you need to guess words related to cats. 🐈‍⬛ Meow!
 </p>
 
-<h1 align="center">Cat Words Game 😻</h1>
+<h1 align="center">Cats Word Game 😻</h1>
 <br>
 
 <img src="./screen.gif" width="300"></img>
