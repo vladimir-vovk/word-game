@@ -1,10 +1,11 @@
 import { Ionicons } from '@expo/vector-icons'
 import { ReactElement } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, useWindowDimensions, View } from 'react-native'
 
-import { Spacing } from 'src/constants'
+import { useAppState } from 'src/app/AppContext'
+import { Spacing, WORD_LENGTH } from 'src/constants'
 import { Alert, Button, Divider } from 'src/ui'
-import { happyEmojie, sadEmojie } from 'src/utils'
+import { happyEmojie, letterSize, plural, sadEmojie } from 'src/utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -19,37 +20,37 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {
-  isPlayerWin: boolean
-  numberOfGuesses: number
-  correctWord: string
-  onRestartGame: () => void
-}
+export const GameOver = (): ReactElement => {
+  const { height } = useWindowDimensions()
+  const { state, dispatch } = useAppState()
+  const { row: numberOfGuesses, correctWord, isPlayerWin } = state
 
-export const GameOver = ({
-  isPlayerWin,
-  numberOfGuesses,
-  correctWord,
-  onRestartGame
-}: Props): ReactElement => {
+  const onRestartGame = () => dispatch({ type: 'restart' })
+
+  const guesses = plural({ n: numberOfGuesses, singular: 'guess', plural: 'guesses' })
+  const winMessage = `Congratulations! ${happyEmojie()}\nYou got it in ${guesses}.`
+  const looseMessage = `Sorry! ${sadEmojie()}\nThe correct answer is ${correctWord.toUpperCase()}.`
+
+  const alertWidth = letterSize(height) * WORD_LENGTH + (WORD_LENGTH - 1) * Spacing.sm
+
   return (
     <View style={styles.container}>
-      {isPlayerWin ? (
-        <Alert status="success">{`Congratulations! ${happyEmojie()}\nYou got it in ${numberOfGuesses} ${
-          numberOfGuesses === 1 ? 'guess' : 'guesses'
-        }.`}</Alert>
-      ) : (
-        <Alert status="error">{`Sorry! ${sadEmojie()}\nThe correct answer is ${correctWord.toUpperCase()}.`}</Alert>
-      )}
-      <>
+      <View style={{ width: alertWidth }}>
+        {isPlayerWin ? (
+          <Alert status="success">{winMessage}</Alert>
+        ) : (
+          <Alert status="error">{looseMessage}</Alert>
+        )}
+
         <Divider size="lg" />
+
         <Button
           onPress={onRestartGame}
           rightIcon={<Ionicons name="ios-game-controller-outline" color="yellowgreen" size={32} />}
         >
           Restart
         </Button>
-      </>
+      </View>
     </View>
   )
 }

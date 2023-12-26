@@ -1,23 +1,24 @@
 import { ReactElement } from 'react'
 import { useWindowDimensions } from 'react-native'
 
-import { MIN_WIDTH, SCREEN_RATIO, Spacing, WORD_LENGTH } from 'src/constants'
+import { useAppState } from 'src/app/AppContext'
+import { WORD_LENGTH } from 'src/constants'
 import { Divider, Row } from 'src/ui'
-import { letterType } from 'src/utils'
+import { letterSize, letterType } from 'src/utils'
 
 import { Letter } from './Letter'
 
 type Props = {
   children: string
-  correctWord: string
   isInput: boolean
-  isGameOver: boolean
 }
 
-export const Word = ({ children, correctWord, isInput, isGameOver }: Props): ReactElement => {
+export const Word = ({ children, isInput }: Props): ReactElement => {
+  const { state } = useAppState()
+  const { correctWord, isGameOver } = state
+
   const { height: screenHeight } = useWindowDimensions()
-  const width = Math.max(MIN_WIDTH, screenHeight * SCREEN_RATIO)
-  const size = Math.floor((width - 2 * Spacing.md - Spacing.sm * WORD_LENGTH) / WORD_LENGTH)
+  const size = letterSize(screenHeight)
 
   const word = `${children}      `.slice(0, WORD_LENGTH)
   const cursorIndex = children.length
@@ -37,6 +38,7 @@ export const Word = ({ children, correctWord, isInput, isGameOver }: Props): Rea
           </Letter>
         ))}
       </Row>
+
       <Divider size="sm" />
     </>
   )

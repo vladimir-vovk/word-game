@@ -1,6 +1,7 @@
 import { ReactElement, useMemo } from 'react'
 import { StyleSheet, useWindowDimensions, View } from 'react-native'
 
+import { useAppState } from 'src/app/AppContext'
 import { MIN_WIDTH, SCREEN_RATIO, Spacing } from 'src/constants'
 import { Divider } from 'src/ui'
 import { usedLettersTypes } from 'src/utils'
@@ -18,14 +19,14 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {
-  onPress: (key: string) => void
-  words: string[]
-  correctWord: string
-}
-
-export const Keyboard = ({ onPress, words, correctWord }: Props): ReactElement => {
+export const Keyboard = (): ReactElement => {
   const { height: screenHeight } = useWindowDimensions()
+
+  const { state, dispatch } = useAppState()
+  const { words: allWords, row, correctWord } = state
+  const words = allWords.slice(0, row)
+
+  const onPress = (key: string) => dispatch({ type: 'keypress', key })
 
   const usedLetters = useMemo(() => {
     return usedLettersTypes({ words, correctWord })

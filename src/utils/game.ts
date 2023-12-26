@@ -1,3 +1,4 @@
+import { MIN_WIDTH, SCREEN_RATIO, Spacing } from 'src/constants'
 import { WORD_LENGTH, WORDS } from 'src/constants/game'
 
 export const initWords = (): string[] => Array(WORD_LENGTH + 1).fill('')
@@ -68,4 +69,19 @@ export const sadEmojie = (): string =>
 
 export const randomWord = (): string => {
   return random(WORDS)
+}
+
+type PluralArgs = {
+  n: number
+  singular: string
+  plural: string
+}
+
+export const plural = ({ n, singular, plural }: PluralArgs): string =>
+  `${n} ${n === 1 ? singular : plural}`
+
+export const letterSize = (screenHeight: number): number => {
+  const width = Math.max(MIN_WIDTH, screenHeight * SCREEN_RATIO)
+  const size = Math.floor((width - 2 * Spacing.md - Spacing.sm * WORD_LENGTH) / WORD_LENGTH)
+  return size
 }

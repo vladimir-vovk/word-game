@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import { StyleSheet, View } from 'react-native'
 
+import { useAppState } from 'src/app/AppContext'
 import { Spacing } from 'src/constants'
 
 import { Word } from './Word'
@@ -11,18 +12,14 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {
-  words: string[]
-  row: number
-  correctWord: string
-  isGameOver: boolean
-}
+export const GuessSlots = (): ReactElement => {
+  const { state } = useAppState()
+  const { words, row } = state
 
-export const GuessSlots = ({ words, correctWord, row, isGameOver }: Props): ReactElement => {
   return (
     <View style={styles.container}>
       {words.map((word, i) => (
-        <Word key={i} correctWord={correctWord} isInput={row === i} isGameOver={isGameOver}>
+        <Word key={i} isInput={row === i}>
           {word}
         </Word>
       ))}

@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     borderColor: 'yellowgreen',
     borderRadius: BorderRadius.md,
     paddingVertical: Spacing.md,
-    paddingHorizontal: Spacing.lg
+    paddingHorizontal: Spacing.lg,
+    alignSelf: 'center'
   },
   label: {
     color: 'yellowgreen'
